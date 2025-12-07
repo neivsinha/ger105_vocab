@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GER105 Vocabulary Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GER105 Vocabulary Quiz</h1>
+            <div class="stats" id="stats">
+                <span id="vocab-count">Loading...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="mode-selector">
+                <button id="mode-definition" class="mode-btn active" data-mode="definition">
+                    <span class="mode-icon">📖</span>
+                    Definition Mode
+                </button>
+                <button id="mode-word" class="mode-btn" data-mode="word">
+                    <span class="mode-icon">🇩🇪</span>
+                    Word Mode
+                </button>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-prompt">
+                    <div class="prompt-label" id="prompt-label">English Definition</div>
+                    <div class="prompt-content" id="prompt-content">
+                        Click "Next" to start
+                    </div>
+                </div>
+
+                <div class="quiz-answer hidden" id="answer-section">
+                    <div class="answer-grid" id="answer-grid">
+                        <!-- Answer items will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button id="action-btn" class="btn btn-primary" disabled>
+                        Next
+                    </button>
+                </div>
+            </div>
+
+            <div class="error-message hidden" id="error-message">
+                <p>⚠️ No vocabulary data loaded. Please add your data to <code>data.txt</code> and restart the server.</p>
+            </div>
+        </main>
+
+        <footer>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
