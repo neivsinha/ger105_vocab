@@ -2,6 +2,7 @@
 let currentMode = 'definition';
 let currentEntry = null;
 let isAnswerRevealed = false;
+let sessionCardCount = 0;
 
 // DOM elements
 const modeButtons = document.querySelectorAll('.mode-btn');
@@ -12,6 +13,7 @@ const answerSection = document.getElementById('answer-section');
 const answerGrid = document.getElementById('answer-grid');
 const actionBtn = document.getElementById('action-btn');
 const statsElement = document.getElementById('vocab-count');
+const sessionCounter = document.getElementById('session-counter');
 const errorMessage = document.getElementById('error-message');
 
 // Field labels for display
@@ -102,7 +104,9 @@ function switchMode(mode) {
         promptLabel.textContent = 'German Word';
     }
 
-    // Reset and load new entry
+    // Reset session counter and load new entry
+    sessionCardCount = 0;
+    updateSessionCounter();
     resetQuiz();
     loadNextEntry();
 }
@@ -120,11 +124,21 @@ async function loadNextEntry() {
         displayPrompt();
         resetAnswer();
 
+        // Increment session counter
+        sessionCardCount++;
+        updateSessionCounter();
+
     } catch (error) {
         console.error('Error loading entry:', error);
         promptContent.textContent = 'Error loading vocabulary. Please check data.txt';
         actionBtn.disabled = true;
     }
+}
+
+// Update session counter display
+function updateSessionCounter() {
+    const cardText = sessionCardCount === 1 ? 'card' : 'cards';
+    sessionCounter.textContent = `Session: ${sessionCardCount} ${cardText}`;
 }
 
 // Display the prompt based on current mode
